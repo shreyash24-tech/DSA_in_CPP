@@ -14,71 +14,33 @@ public:
     }
 };
 
-class List
+class LinkedList
 {
 public:
     Node *head;
     Node *tail;
 
-    List()
+    LinkedList()
     {
         head = tail = NULL;
     }
 
-    void push_front(int val)
+    void insert_first(int val)
     {
         Node *newNode = new Node(val);
 
         if (head == NULL)
         {
             head = tail = newNode;
-            return;
         }
-
-        newNode->next = head;
-        head = newNode;
+        else
+        {
+            newNode->next = head;
+            head = newNode;
+        }
     }
 
-    void push_back(int val)
-    {
-        Node *newNode = new Node(val);
-
-        if (head == NULL)
-        {
-            head = tail = newNode;
-            return;
-        }
-
-        tail->next = newNode;
-        tail = newNode;
-    }
-
-    void push_middle(int val, int pos)
-    {
-        Node *newNode = new Node(val);
-
-        if (pos < 0)
-        {
-            cout << "Position is Wrong" << endl;
-            return;
-        }
-        if (pos == 0)
-        {
-            push_front(val);
-        }
-
-        Node *temp = head;
-
-        for (int i = 0; i < pos - 1; i++)
-        {
-            temp = temp->next;
-        }
-
-        newNode->next = temp->next;
-        temp->next = newNode;
-    }
-
-    void print_LL()
+    void print_ll()
     {
         Node *temp = head;
 
@@ -87,73 +49,179 @@ public:
             cout << temp->data << "->";
             temp = temp->next;
         }
-        cout << "NULL";
+        cout << "NULL" << endl;
     }
-
-    void pop_front()
+    
+    void insert_last(int val)
     {
-        Node *temp = head;
-        head = head->next;
-        temp->next = NULL;
-        delete temp;
-    }
-
-    void pop_back()
-    {
-        Node *temp = head;
-        while (temp->next->next = NULL)
-        {
-            temp = temp->next;
-        }
-        temp->next = NULL;
-        delete tail;
-        tail = temp;
-    }
-
-void pop_middle(int pos)
-{
-
-Node *temp=head;
-Node *pre;
-if(pos<0)
-{
-cout<<"Wrong position"<<endl;
-
-}
-if(pos==0)
-{
-pop_front();
-}
-for(int i=0;i<pos-1;i++)
-{
-pre=temp;
-temp=temp->next;
-
-}
-
-pre->next=temp->next;
-temp->next=NULL;
-delete temp;
-
-}
-
+    	Node *newNode =new Node(val);
+    	
+    	if(head == NULL)
+    	{
+    		head =tail = newNode;
+    		
+		}
+    	else
+    	{
+    		tail->next=newNode;
+    		tail=newNode;
+    		
+    		
+		}
+    	
+	}
+	
+	void delete_first()
+	{
+		
+		Node *temp;
+		temp=head;
+		
+		head=head->next;
+		temp->next=NULL;
+		delete temp;
+	}
+	
+	void delete_last()
+	{
+		Node *temp;
+		temp=head;
+		
+		while(temp->next->next!=NULL)
+		{
+			temp=temp->next;
+		}
+		
+		temp->next=NULL;
+		delete tail;
+		tail=temp;
+		
+		
+	}
+	
+	void insert_middle(int val, int pos)
+	{
+		
+		if(pos==0)
+		{
+			insert_first(val);
+			
+		}
+		Node *newNode= new Node(val);
+		Node *temp;
+		temp=head;
+		
+		for(int i=0;i<pos-1;i++)
+		{
+		temp=temp->next;	
+			
+		}
+		newNode->next=temp->next;
+		temp->next= newNode;
+		
+		
+	}
+	
+	void delete_middle()
+	{
+		int pos;
+		
+		cout<<"Enter the position="<<endl;
+		cin>>pos;
+		
+		Node *temp;
+		Node *pre;
+		temp=head;
+		
+		for(int i=0;i<pos;i++)
+		{
+			pre=temp;
+			temp=temp->next;
+		}
+		
+		pre->next=temp->next;
+		temp->next=NULL;
+		delete temp;
+		
+	}
 };
 
-
 int main()
-{
-    List l;
-    l.push_front(3);
-    l.push_front(2);
-    l.push_front(1);
-
-    l.push_back(4);
-    l.push_middle(3, 2);
-    l.print_LL();
+{int ch;
 
 
-    l.pop_front();
-    l.pop_back();
-    l.pop_middle(2);
-    l.print_LL();
+	LinkedList ll;
+		do{
+	cout<<"-------------MENU--------------"<<endl;
+	cout<<"1 Insert data at first index"<<endl;
+	cout<<"2 insert data at last index"<<endl;
+	cout<<"3 insert data at middle"<<endl;
+	cout<<"4 delete data from first index"<<endl;
+	cout<<"5 delete data from last index"<<endl;
+	cout<<"6 delete data from middle "<<endl;
+	cout<<"7 print linked list"<<endl;
+	cout<<"8 Exit"<<endl;
+	cout<<"Enter your choice"<<endl;
+	cin>>ch;
+	
+
+		
+	
+	switch(ch)
+	{
+		case 1:
+			int val;
+			
+			cout<<"Enter value"<<endl;
+			cin>>val;
+		ll.insert_first(val);	
+		break;
+		
+		case 2:
+			int val2;
+			
+			cout<<"Enter value"<<endl;
+			cin>>val2;
+		ll.insert_last(val2);
+		break;
+		
+		case 3:
+			int val3;
+			int pos;
+			
+			cout<<"Enter value"<<endl;
+			cin>>val3;
+			cout<<"Enter the position"<<endl;
+			cin>>pos;
+		ll.insert_middle(val3,pos);
+		break;
+		
+		case 4:
+			ll.delete_first();
+			break;
+			
+		case 5:
+			ll.delete_last();
+		break;
+		
+		case 6:
+			ll.delete_middle();
+			break;
+			
+		case 7:
+			ll.print_ll();
+			break;
+		
+		case 8:
+			return 0;
+			break;
+			default:
+				cout<<"Wrong choice"<<endl;
+				break;
+			
+	}
+	
+}while(ch!=8);
+ 
+    return 0;
 }
