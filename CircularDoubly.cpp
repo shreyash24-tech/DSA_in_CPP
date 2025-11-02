@@ -203,7 +203,7 @@ int main()
         cout << "4 Delete first" << endl;
         cout << "5 Delete End" << endl;
         cout << "6 Delete Middle" << endl;
-        cout << "7 Print Circular Doubly Linked List" << endl;
+        cout << "7 Print CirculaLinked List" << endl;
 
         cout << "8 EXIT" << endl;
 

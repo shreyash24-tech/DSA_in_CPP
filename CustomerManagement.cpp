@@ -18,10 +18,11 @@ void addCustomer()
     cout << "Enter the name of customer" << endl;
     cin >> customer[cus_count].name;
     cus_count++;
-    cout << "Customer Added Successfully";
+    cout << "Customer Added Successfully"<<endl;
 }
 
 void display()
+
 {
     if (cus_count == 0)
     {
